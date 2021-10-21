@@ -1,4 +1,5 @@
 import numpy as np
+import plot
 gamma = 0.9
 alpha = 0.1
 
@@ -46,13 +47,4 @@ def num_over_game(start):
 
     return result_flag
 
-
-win_count = 0
-lose_count = 0
-for ji in range(100):
-    if "win" == num_over_game(0):
-        win_count += 1
-    else:
-        lose_count += 1
-
-print(win_count, lose_count)
+plot.plot_func(num_over_game)
