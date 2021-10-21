@@ -17,17 +17,19 @@ reward = np.array([[0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0],
 Q = np.array(np.zeros([11, 11]))
 
 for i in range(10000):
-    p_state = np.random.randint(0, 10)
-    n_actions = []
-    for j in range(11):
-        if reward[p_state, j] != 0:
-            n_actions.append(j)
+    s_state = 0
+    while s_state != 10:
+        a_actions = []
+        for j in range(11):
+            if reward[s_state, j] != 0:
+                a_actions.append(j)
 
-    n_state = np.random.choice(n_actions)
+        a_state = np.random.choice(a_actions)
 
-    Q[p_state, n_state] = Q[p_state, n_state]+alpha * \
-        (reward[p_state, n_state]+gamma *
-         Q[n_state, np.random.randint(0,len(Q[n_state, ]))] - Q[p_state, n_state])
+        Q[s_state, a_state] = Q[s_state, a_state]+alpha * \
+            (reward[s_state, a_state]+gamma *
+            Q[a_state, np.random.randint(0,len(Q[a_state, ]))] - Q[s_state, a_state])
+        s_state = a_state
 
 
 def num_over_game(start):
