@@ -25,19 +25,20 @@ def action_select(s):
     return np.random.choice(a_actions)
 
 for i in range(10000):
+    count = 0
     s_state = 0
     a_state = action_select(s_state)
     while s_state != 10:
-        a_state =  min(10,a_state +np.random.randint(0, 3)+1)
         a_state_dash = action_select(a_state)
+        count+=1
 
         r = reward[s_state, a_state]
         if(r == 1):
             r = 0
+        r*=pow(-1,count+1)
 
         Q[s_state, a_state] = Q[s_state, a_state]+alpha * \
-            (reward[s_state, a_state]+gamma *
-            Q[a_state, a_state_dash] - Q[s_state, a_state])
+            (r+gamma *Q[a_state, a_state_dash] - Q[s_state, a_state])
 
         s_state = a_state
         a_state = a_state_dash

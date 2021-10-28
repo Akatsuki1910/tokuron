@@ -1,5 +1,6 @@
 import numpy as np
 import plot
+c_bid = 0.1
 
 reward = np.array([[0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0],
                    [0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0],
@@ -21,9 +22,6 @@ def action_select(s):
             a_actions.append(j)
     return np.random.choice(a_actions)
 
-
-sr = np.array(np.zeros([11, 11]))
-rc = np.array(np.zeros([11, 11]))
 for i in range(10000):
     s_state = 0
     epi = 0
@@ -37,11 +35,10 @@ for i in range(10000):
             for i in range(epi):
                 st = memory[i][0]
                 at = memory[i][1]
-                rc[st,at] += 1
-                sr[st,at] += r * pow(-1,epi+1)
-                Q[st,at] = sr[st,at] / rc[st,at]
+                Q[st,at] += c_bid*(r-Q[st,at])
             epi=0
             memory = []
-        s_state = a_state
+
+        s_state = min(10,a_state +np.random.randint(0, 3)+1)
 
 plot.plot_func(Q)
