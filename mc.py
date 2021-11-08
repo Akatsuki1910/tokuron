@@ -1,6 +1,7 @@
 """ monte carlo """
 
 import numpy as np
+
 import plot
 
 reward = np.array([[0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0],
@@ -22,8 +23,8 @@ def action_select(s_s):
     return np.random.choice([i for i in range(1, 4) if i + s_s < 11])
 
 
-sr = np.array(np.zeros([11, 11]))
-rc = np.array(np.zeros([11, 11]))
+sr = np.array(np.zeros([11, 3]))
+rc = np.array(np.zeros([11, 3]))
 for i in range(10000):
     S_STATE = 0
     EPI = 0
