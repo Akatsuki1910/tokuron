@@ -4,17 +4,6 @@ import numpy as np
 
 import plot
 
-reward = np.array([[0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0],
-                   [0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0],
-                   [0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0],
-                   [0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0],
-                   [0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0],
-                   [0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0],
-                   [0, 0, 0, 0, 0, 0, 0, 1, 1, 10, 0],
-                   [0, 0, 0, 0, 0, 0, 0, 0, 1, 10, -10],
-                   [0, 0, 0, 0, 0, 0, 0, 0, 0, 10, -10],
-                   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -10],
-                   ])
 Q = np.array(np.zeros([11, 3]))
 
 
@@ -31,24 +20,30 @@ for i in range(10000):
     memory = []
     while S_STATE != 10:
         a_state = action_select(S_STATE)
+        R = 0.001
         memory.append([S_STATE, a_state])
-        r = reward[S_STATE, a_state]
 
-        if S_STATE+a_state < 10:
-            a_state = action_select(S_STATE+a_state)
+        s_state_dash = S_STATE + a_state
+        if s_state_dash == 10:
+            R = -10
+        else:
+            s_state_dash = action_select(s_state_dash)+s_state_dash
+            if s_state_dash == 10:
+                R = 10
 
         EPI += 1
 
-        if r != 1:
+        if R != 0.001:
             for l in range(EPI):
                 st = memory[l][0]
                 at = memory[l][1]-1
                 rc[st, at] += 1
-                sr[st, at] += r
+                sr[st, at] += R
                 Q[st, at] = sr[st, at] / rc[st, at]
             EPI = 0
             memory = []
 
-        S_STATE += a_state
+        S_STATE = s_state_dash
 
+print(Q)
 plot.plot_func(Q)

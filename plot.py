@@ -29,13 +29,13 @@ def __num_over_game(q_arr):
             result_flag = "lose"
             break
         n_pos += np.random.randint(0, 3)+1
-        # path.append(n_pos)
+    #     path.append(n_pos)
     # print(path)
 
     return result_flag
 
 
-def __play_game(nog, q_arr=0):
+def __play_game(nog, q_arr):
     """ play game """
     win_arr = []
     lose_arr = []
@@ -54,7 +54,7 @@ def __play_game(nog, q_arr=0):
 
 def plot_func(q_arr):
     """ plot func """
-    nnog = __play_game(__nomal_num_over_game)
+    nnog = __play_game(__nomal_num_over_game, np.array(np.zeros([11, 3])))
     nog = __play_game(__num_over_game, q_arr)
     points = (nnog[0], nnog[1], nog[0], nog[1])
     _fig, axes = plt.subplots()
