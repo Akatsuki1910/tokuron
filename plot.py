@@ -39,11 +39,11 @@ def __play_game(nog, q_arr):
     """ play game """
     win_arr = []
     lose_arr = []
-    for _i in range(100):
+    for _ in range(100):
         win_count = 0
         lose_count = 0
-        for _j in range(100):
-            if "win" == nog(q_arr):
+        for _ in range(100):
+            if nog(q_arr) == "win":
                 win_count += 1
             else:
                 lose_count += 1
@@ -54,7 +54,7 @@ def __play_game(nog, q_arr):
 
 def plot_func(q_arr):
     """ plot func """
-    nnog = __play_game(__nomal_num_over_game, np.array(np.zeros([11, 3])))
+    nnog = __play_game(__nomal_num_over_game, np.array(np.zeros([10, 3])))
     nog = __play_game(__num_over_game, q_arr)
     points = (nnog[0], nnog[1], nog[0], nog[1])
     _fig, axes = plt.subplots()
