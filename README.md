@@ -13,9 +13,7 @@ Q学習
 ## Install
 
 ```PowerShell
-pip install numpy
-pip install matplotlib
-pip install seaborn
+pip install -r requirements.txt
 ```
 
 ## Usage
