@@ -10,4 +10,5 @@ Q学習
 ```shell
 pip install numpy
 pip install matplotlib
+pip install seaborn
 ```
