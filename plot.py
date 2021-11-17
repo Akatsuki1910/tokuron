@@ -2,6 +2,7 @@
 
 import matplotlib.pyplot as plt
 import numpy as np
+import seaborn as sns
 
 
 def __nomal_num_over_game(_q_arr):
@@ -69,4 +70,7 @@ def plot_func(q_arr):
     plt.ylim([0, 100])
     plt.grid()
 
+    plt.show()
+
+    sns.heatmap(q_arr, vmin=-10, vmax=10, annot=True, fmt="1.3f", center=0)
     plt.show()
