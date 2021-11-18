@@ -29,7 +29,7 @@ for i in range(10000):
 
         s_state_dash = S_STATE + a_state
         if s_state_dash == 10:
-            R = 0
+            R = 1
         else:
             s_state_dash = action_select(s_state_dash, 1)+s_state_dash
             if s_state_dash == 10:
