@@ -1,4 +1,4 @@
-"""This is a test program."""
+""" simple profit sharing """
 
 import numpy as np
 
