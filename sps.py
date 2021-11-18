@@ -6,7 +6,8 @@ import plot
 
 Q = np.array(np.zeros([11, 3]))
 
-C_BID = 0.1
+# C_BID = 0.1
+C_BID = 0.06
 
 
 def action_select(s_s, epsilon):
@@ -29,11 +30,12 @@ for i in range(10000):
 
         s_state_dash = S_STATE + a_state
         if s_state_dash == 10:
-            R = 1
+            # R = -10
+            R = 0
         else:
             s_state_dash = action_select(s_state_dash, 1)+s_state_dash
             if s_state_dash == 10:
-                R = 20
+                R = 10
 
         memory.append([S_STATE, a_state, R])
         EPI += 1

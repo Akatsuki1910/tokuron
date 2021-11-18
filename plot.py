@@ -72,5 +72,9 @@ def plot_func(q_arr):
 
     plt.show()
 
-    sns.heatmap(q_arr, vmin=-10, vmax=10, annot=True, fmt="1.3f", center=0)
+    sns.heatmap(q_arr, vmin=-10, vmax=10, annot=True, fmt="1.3f",
+                center=0, xticklabels=[i+1 for i in range(3)], yticklabels=[i for i in range(11)])
+    plt.title('Q table')
+    plt.xlabel("action")
+    plt.ylabel("state")
     plt.show()
